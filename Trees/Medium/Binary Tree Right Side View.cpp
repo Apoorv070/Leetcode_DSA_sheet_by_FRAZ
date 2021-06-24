@@ -39,3 +39,27 @@ public:
         
     }
 };
+
+
+//Recurcsion
+class Solution {
+public:
+    void View(TreeNode* root,int cur_depth,int &covered_depth,vector<int>&v)
+    {
+        if(cur_depth>covered_depth){
+            v.push_back(root->val);covered_depth+=1;}
+        if(root->right)
+            View(root->right,cur_depth+1,covered_depth,v);
+        if(root->left)
+            View(root->left,cur_depth+1,covered_depth,v);
+            
+            
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> v;int covered_depth=-1;
+        if(root==NULL)
+            return v;
+        View(root,0,covered_depth,v);
+        return v;
+    }
+};
