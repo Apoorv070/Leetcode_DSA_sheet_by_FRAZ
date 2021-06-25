@@ -18,3 +18,27 @@ public:
         return v;
     }
 };
+
+
+//Trick
+#define pb push_back
+vector<int> getRow(int A) {
+vector<int> res;
+long long num = 1;
+res.push_back(num);
+for(int i=1;i<=A;i++){
+    num *= (A-i+1);
+    num /= i;
+    res.push_back(num);
+}
+return res;
+}
+
+vector<vector<int> > Solution::solve(int A) {
+    vector<vector<int>> ans;
+    for(int j = 0 ; j <= A ; j++){
+    vector<int> res = getRow(j);
+    ans.pb(res);
+    }
+    return ans;
+}
