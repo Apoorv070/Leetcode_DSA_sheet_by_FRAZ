@@ -1,27 +1,22 @@
 class Solution {
 public:
-    int maxProduct(vector<int>& nums) {
-        int n = nums.size();
-        int maxi = 0;
-	    int max_here = 1;
-	    int min_here = 1;
-	    for(int i=0;i<n;i++){
-	        if(nums[i]>0){
-	            max_here = max_here*nums[i];
-	            min_here = min(1,min_here*nums[i]);
-	        }else if(nums[i]<0){
-	            long long temp = max_here;
-	            max_here = max(1,min_here*nums[i]);
-	            min_here = temp*nums[i];
-	            
-	        }else{
-	           max_here = 1;
-	           min_here = 0;
-	        }
-	        
-	        maxi = max(maxi,max_here);
-	    }
-	    return maxi;
+    int maxProduct(vector<int>& A) {
+		int maxDP = A[0];
+        int minDP = A[0];
+        int max_elem = A[0];
+        for(int i=1;i<A.size();i++){
+            if(A[i]>=0){
+                maxDP = max(A[i], maxDP*A[i]);
+                minDP = min(A[i], minDP*A[i]);
+            }
+            else{
+                int maxDP_old = maxDP;
+                maxDP = max(A[i], minDP*A[i]);
+                minDP = min(A[i], maxDP_old*A[i]); 
+            }
+            max_elem = max(max_elem, maxDP);
+        }
+        return max_elem;
         
     }
 };
